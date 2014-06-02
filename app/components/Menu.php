@@ -57,18 +57,23 @@ class Menu
 				$itemClass == ' class=""' ? $itemClass = '' : '';
 				echo '<li' . $itemClass . '>' . HtmlHelper::link($item['url'], $label);
 				if (isset($item['items'])) {
-					if (is_array($item['items'])) {
-						$subMenu = new Menu();
-						$subMenu->menuOptions = array('class' => 'submenu');
-						$subMenu->listActiveCssClass = 'current active';
-						$subMenu->items = $item['items'];
-						$subMenu->make();
-					}
+					$this->renderSubMenu($item['items']);
 				}
 				echo '</li>';
 			} else {
 				echo '<li>' . $item . '</li>';
 			}
+		}
+	}
+
+	private function renderSubMenu($items)
+	{
+		if (is_array($items)) {
+			$subMenu = new Menu();
+			$subMenu->menuOptions = array('class' => 'submenu');
+			$subMenu->listActiveCssClass = 'current active';
+			$subMenu->items = $items;
+			$subMenu->make();
 		}
 	}
 }

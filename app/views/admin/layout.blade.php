@@ -235,24 +235,19 @@
 	<ul class="dropdown-menu">
 		<li>
 			<a href="extra_profile.html">
-				<i class="glyph-icon flaticon-account"></i> My Profile
+				<i class="glyph-icon flaticon-account"></i> 我的资料
 			</a>
 		</li>
 		<li>
 			<a href="calendar.html">
-				<i class="glyph-icon flaticon-calendar"></i> My Calendar
-			</a>
-		</li>
-		<li>
-			<a href="calendar.html">
-				<i class="glyph-icon flaticon-settings21"></i> Account Settings
+				<i class="glyph-icon flaticon-settings21"></i> 用户设置
 			</a>
 		</li>
 		<li class="dropdown-footer clearfix">
-			<a href="javascript:;" class="toggle_fullscreen" title="Fullscreen">
+			<a href="javascript:;" class="toggle_fullscreen" title="全屏">
 				<i class="glyph-icon flaticon-fullscreen3"></i>
 			</a>
-			<a href="lockscreen.html" title="Lock Screen">
+			<a href="lockscreen.html" title="锁屏">
 				<i class="glyph-icon flaticon-padlock23"></i>
 			</a>
 			<a href="{{ URL::to('admin/logout') }}" title="注销">
@@ -311,12 +306,12 @@
 					'label' => '文章',
 					'url' => URL::to('admin/post'),
 					'icon' => 'book',
-					'active' => array('admin/post', 'admin/post/list'),
+					'active' => array('admin/post', 'admin/post/list','admin/post/view/{id}','admin/post/edit/{id}'),
 					'items' => array(
 						array(
 							'label' => '所有文章',
 							'url' => URL::to('admin/post/list'),
-							'active' => array('admin/post/list'),
+							'active' => array('admin/post/list','admin/post/view/{id}','admin/post/edit/{id}'),
 						),
 						array(
 							'label' => '添加文章',

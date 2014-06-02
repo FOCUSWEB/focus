@@ -15,13 +15,17 @@ Route::get('/', function () {
 	return View::make('hello');
 });
 Route::group(array('before' => 'auth'), function () {
+//	首页仪表盘
 	Route::get('admin', 'AdminIndexController@dashboard');
 	Route::get('admin/dashboard', 'AdminIndexController@dashboard');
+//	文章
 	Route::get('admin/post', 'AdminPostController@listPost');
 	Route::get('admin/post/list', 'AdminPostController@listPost');
+	Route::get('admin/post/view/{id}', 'AdminPostController@viewPost');
+	Route::any('admin/post/edit/{id}', array('as' => 'adminPostEdit', 'uses' => 'AdminPostController@editPost'));
 });
 
-Route::any('admin/login', function () {
+Route::any('admin/login', array('as' => 'adminLogin', function () {
 	if (Input::has('username') && Input::has('password')) {
 		$username = Input::get('username');
 		$password = Input::get('password');
@@ -30,7 +34,7 @@ Route::any('admin/login', function () {
 		}
 	}
 	return View::make('admin.login');
-});
+}));
 Route::get('admin/logout', function () {
 	Auth::logout();
 	return Redirect::intended('admin');
