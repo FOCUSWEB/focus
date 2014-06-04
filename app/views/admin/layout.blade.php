@@ -306,16 +306,37 @@
 					'label' => '文章',
 					'url' => URL::to('admin/post'),
 					'icon' => 'book',
-					'active' => array('admin/post', 'admin/post/list','admin/post/view/{id}','admin/post/edit/{id}'),
+					'active' => array('admin/post', 'admin/post/list', 'admin/post/view/{id}', 'admin/post/edit/{id}'),
 					'items' => array(
 						array(
 							'label' => '所有文章',
 							'url' => URL::to('admin/post/list'),
-							'active' => array('admin/post/list','admin/post/view/{id}','admin/post/edit/{id}'),
+							'active' => array('admin/post/list', 'admin/post/view/{id}', 'admin/post/edit/{id}'),
 						),
 						array(
 							'label' => '添加文章',
 							'url' => URL::to('admin/post/create'),
+							'active' => array('admin/post/create'),
+						),
+					),
+				),
+				array(
+					'label' => '分类',
+					'url' => URL::to('admin/category'),
+					'icon' => 'tasks',
+					'active' => array('admin/category', 'admin/category/list', 'admin/category/view/{id}',
+						'admin/category/edit/{id}'),
+					'items' => array(
+						array(
+							'label' => '所有分类',
+							'url' => URL::to('admin/category/list'),
+							'active' => array('admin/category', 'admin/category/list', 'admin/category/view/{id}',
+							),
+						),
+						array(
+							'label' => '添加分类',
+							'url' => URL::to('admin/category/create'),
+							'active' => array('admin/category/create'),
 						),
 					),
 				),
@@ -324,6 +345,7 @@
 					'url' => URL::to('admin/user'),
 					'icon' => 'user',
 				),
+
 			);
 			$menu->make();
 			?>
