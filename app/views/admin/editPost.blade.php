@@ -1,16 +1,20 @@
 @extends('admin.layout')
 @section('content')
 @section('pageLevelStyle')
-<link href="<?php echo Config::get('site.adminAssetsPath');?>plugins/datetimepicker/jquery.datetimepicker.css" rel="stylesheet">
-<link href="<?php echo Config::get('site.adminAssetsPath');?>plugins/pickadate/themes/default.css" rel="stylesheet">
-<link href="<?php echo Config::get('site.adminAssetsPath');?>plugins/pickadate/themes/default.date.css" rel="stylesheet">
-<link href="<?php echo Config::get('site.adminAssetsPath');?>plugins/pickadate/themes/default.time.css" rel="stylesheet">
+<link href="<?php echo Config::get('site.adminAssetsPath'); ?>plugins/datetimepicker/jquery.datetimepicker.css"
+      rel="stylesheet">
+<link href="<?php echo Config::get('site.adminAssetsPath'); ?>plugins/pickadate/themes/default.css" rel="stylesheet">
+<link href="<?php echo Config::get('site.adminAssetsPath'); ?>plugins/pickadate/themes/default.date.css"
+      rel="stylesheet">
+<link href="<?php echo Config::get('site.adminAssetsPath'); ?>plugins/pickadate/themes/default.time.css"
+      rel="stylesheet">
 @stop
 @section('pageLevelScripts')
-<script src="<?php echo Config::get('site.adminAssetsPath');?>plugins/datetimepicker/jquery.datetimepicker.js"></script>
-<script src="<?php echo Config::get('site.adminAssetsPath');?>plugins/pickadate/picker.js"></script>
-<script src="<?php echo Config::get('site.adminAssetsPath');?>plugins/pickadate/picker.date.js"></script>
-<script src="<?php echo Config::get('site.adminAssetsPath');?>plugins/pickadate/picker.time.js"></script>
+<script
+    src="<?php echo Config::get('site.adminAssetsPath'); ?>plugins/datetimepicker/jquery.datetimepicker.js"></script>
+<script src="<?php echo Config::get('site.adminAssetsPath'); ?>plugins/pickadate/picker.js"></script>
+<script src="<?php echo Config::get('site.adminAssetsPath'); ?>plugins/pickadate/picker.date.js"></script>
+<script src="<?php echo Config::get('site.adminAssetsPath'); ?>plugins/pickadate/picker.time.js"></script>
 @stop
 <div id="main-content">
     <div class="page-title"><i class="icon-custom-left"></i>
@@ -66,32 +70,22 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12 m-b-40">
                             <div class="form-group">
-                                <label class="form-label"><strong>创建时间</strong></label>
-                                <span class="tips">文章创建时的时间,不可修改</span>
+                                <label class="form-label"><strong>分类目录</strong></label>
+                                <span class="tips">文章所在的目录</span>
 
                                 <div class="controls">
-                                    <?php echo Form::text('createTime', null,
-                                        array('class' => 'form-control', 'disabled' => 'disabled'));?>
+                                    <?php echo Form::select('categoryId', $categoryList, $post->categoryId, array()); ?>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label"><strong>更新时间</strong></label>
-                                <span class="tips">文章更新时的时间,不可修改</span>
 
-                                <div class="controls">
-                                    <?php echo Form::text('updateTime', null,
-                                        array('class' => 'datetimepicker','data-inline'=>"true"));?>
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <label class="form-label"><strong>作者</strong></label>
                                 <span class="tips">当前用户</span>
 
                                 <div class="controls">
-                                    <?php echo Form::select('authoId', $userList,
+                                    <?php echo Form::select('authorId', $userList,
                                         Auth::user()->id,
                                         array()); ?>
-                                    <?php echo Auth::user()->username; ?>
                                 </div>
                             </div>
                             <div class="col-sm-9 col-sm-offset-3">
