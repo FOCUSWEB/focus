@@ -23,6 +23,12 @@ Route::group(array('before' => 'auth'), function () {
 	Route::get('admin/post/list', 'AdminPostController@listPost');
 	Route::get('admin/post/view/{id}', 'AdminPostController@viewPost');
 	Route::any('admin/post/edit/{id}', array('as' => 'adminPostEdit', 'uses' => 'AdminPostController@editPost'));
+//	分类
+	Route::get('admin/category', 'AdminCategoryController@listCategory');
+	Route::get('admin/category/list', 'AdminCategoryController@listCategory');
+	Route::get('admin/category/view/{id}', 'AdminCategoryController@viewCategory');
+	Route::any('admin/category/edit/{id}', 'AdminCategoryController@editCategory');
+	Route::any('admin/category/create', 'AdminCategoryController@createCategory');
 });
 
 Route::any('admin/login', array('as' => 'adminLogin', function () {
