@@ -22,7 +22,7 @@ class TableButtonGroup
 			foreach ($this->buttons as $button) {
 				if (is_array($button)) {
 					echo HtmlHelper::link($button['url'], $button['label'], array('class' => ('btn btn-' .
-							$button['type'])));
+							$button['type']))).' ';
 				}
 			}
 			echo '</div>';
