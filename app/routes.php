@@ -28,7 +28,8 @@ Route::group(array('before' => 'auth'), function () {
 	Route::get('admin/category/list', 'AdminCategoryController@listCategory');
 	Route::get('admin/category/view/{id}', 'AdminCategoryController@viewCategory');
 	Route::any('admin/category/edit/{id}', 'AdminCategoryController@editCategory');
-	Route::any('admin/category/create', 'AdminCategoryController@createCategory');
+	Route::any('admin/category/create', array('as' => 'adminCategoryCreate',
+		'uses' => 'AdminCategoryController@createCategory'));
 });
 
 Route::any('admin/login', array('as' => 'adminLogin', function () {
