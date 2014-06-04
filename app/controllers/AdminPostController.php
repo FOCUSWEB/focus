@@ -22,6 +22,7 @@ class AdminPostController extends AdminController
 
 	public function editPost($id)
 	{
+		$post = Post::find($id);
 		if (Request::isMethod('POST')) {
 			$validator = Validator::make(
 				array(
@@ -36,13 +37,20 @@ class AdminPostController extends AdminController
 			if ($validator->fails()) {
 				return Redirect::to('admin/post/edit/' . $id)->withErrors($validator);
 			}
+			$post->setRawAttributes(Input::except('_token'));
+
+			if ($post->save()) {
+				return Redirect::to('admin/post/view/' . $id);
+			}
 		}
-		$post = Post::find($id);
-		$users = User::all();
 		$userList = array();
-		foreach ($users as $user) {
+		$categoryList = array();
+		foreach (User::all() as $user) {
 			$userList[$user->id] = $user->username;
 		}
-		return View::make('admin.editPost', array('post' => $post, 'userList' => $userList));
+		foreach (Category::all() as $category) {
+			$categoryList[$category->id] = $category->name;
+		}
+		return View::make('admin.editPost', array('post' => $post, 'userList' => $userList, 'categoryList' => $categoryList));
 	}
 }
