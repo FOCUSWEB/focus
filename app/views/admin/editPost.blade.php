@@ -1,5 +1,4 @@
 @extends('admin.layout')
-@section('content')
 @section('pageLevelStyle')
 <link href="<?php echo Config::get('site.adminAssetsPath'); ?>plugins/datetimepicker/jquery.datetimepicker.css"
       rel="stylesheet">
@@ -11,11 +10,12 @@
 @stop
 @section('pageLevelScripts')
 <script
-    src="<?php echo Config::get('site.adminAssetsPath'); ?>plugins/datetimepicker/jquery.datetimepicker.js"></script>
+	src="<?php echo Config::get('site.adminAssetsPath'); ?>plugins/datetimepicker/jquery.datetimepicker.js"></script>
 <script src="<?php echo Config::get('site.adminAssetsPath'); ?>plugins/pickadate/picker.js"></script>
 <script src="<?php echo Config::get('site.adminAssetsPath'); ?>plugins/pickadate/picker.date.js"></script>
 <script src="<?php echo Config::get('site.adminAssetsPath'); ?>plugins/pickadate/picker.time.js"></script>
 @stop
+@section('content')
 <div id="main-content">
     <div class="page-title"><i class="icon-custom-left"></i>
 
