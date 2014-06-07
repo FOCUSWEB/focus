@@ -7,5 +7,6 @@
  */
 return array(
 	'name' => 'FOCUS.com',
+	'assetsPath' => '/assets/',
 	'adminAssetsPath' => '/assets/admin/',
 );

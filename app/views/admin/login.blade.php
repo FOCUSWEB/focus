@@ -1,98 +1,95 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>
-<html class="no-js sidebar-large lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>
-<html class="no-js sidebar-large lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>
-<html class="no-js sidebar-large lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js sidebar-large"> <!--<![endif]-->
-
-<!-- Added by HTTrack -->
-<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
-<!-- /Added by HTTrack -->
+<html lang="en">
 <head>
-	<!-- BEGIN META SECTION -->
 	<meta charset="utf-8">
-	<title>登录 - <?php echo Config::get('site.name'); ?></title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta content="" name="description"/>
-	<meta content="themes-lab" name="author"/>
-	<!-- END META SECTION -->
-	<!-- BEGIN MANDATORY STYLE -->
-	<link href="<?php echo Config::get('site.adminAssetsPath'); ?>css/icons/icons.min.css" rel="stylesheet">
-	<link href="<?php echo Config::get('site.adminAssetsPath'); ?>css/bootstrap.min.css" rel="stylesheet">
-	<link href="<?php echo Config::get('site.adminAssetsPath'); ?>css/plugins.min.css" rel="stylesheet">
-	<link href="<?php echo Config::get('site.adminAssetsPath'); ?>css/style.min.css" rel="stylesheet">
-	<!-- END  MANDATORY STYLE -->
-	<!-- BEGIN PAGE LEVEL STYLE -->
-	<link href="<?php echo Config::get('site.adminAssetsPath'); ?>css/animate-custom.css" rel="stylesheet">
-	<!-- END PAGE LEVEL STYLE -->
-	<script
-		src="<?php echo Config::get('site.adminAssetsPath'); ?>plugins/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="shortcut icon" href="<?php echo Config::get('site.assetsPath'); ?>images/favicon.ico">
+
+	<title>Signin Template for Bootstrap</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="{{ Config::get('site.adminAssetsPath') }}css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="{{ Config::get('site.adminAssetsPath') }}css/login.css" rel="stylesheet">
+
+
+	<script src="{{ Config::get('site.adminAssetsPath') }}js/jquery-1.11.1.min.js"></script>
+	<script src="{{ Config::get('site.adminAssetsPath') }}js/button.js"></script>
+
+
+	<!-- Just for debugging purposes. Don't actually copy this line! -->
+	<!--[if lt IE 9]>
+	<script src="<?php echo Config::get('site.adminAssetsPath');?>js/ie8-responsive-file-warning.js"></script>
+	<![endif]-->
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
 </head>
 
-<body class="login fade-in" data-page="login">
-<!-- BEGIN LOGIN BOX -->
-<div class="container" id="login-block">
-	<div class="row">
-		<div class="col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
-			<div class="login-box clearfix animated flipInY">
-				<div class="page-icon animated bounceInDown">
-					<img src="<?php echo Config::get('site.adminAssetsPath'); ?>img/account/user-icon.png"
-					     alt="Key icon">
-				</div>
-				<div class="login-logo">
-					<a href="#?login-theme-3">
-						<img src="<?php echo Config::get('site.adminAssetsPath'); ?>img/account/login-logo.png"
-						     alt="Company Logo">
-					</a>
-				</div>
-				<hr>
-				<div class="login-form">
-					<!-- BEGIN ERROR BOX -->
-					<div class="alert alert-danger hide">
-						<button type="button" class="close" data-dismiss="alert">×</button>
-						<h4>Error!</h4>
-						Your Error Message goes here
-					</div>
-					<!-- END ERROR BOX -->
-					<?php echo Form::open(array('route' => array('adminLogin'))); ?>
-					<?php echo Form::text('username', '', array('class' => 'input-field form-control user',
-						'placeholder' => '用户名'));?>
-					<?php echo Form::password('password', array('class' => 'input-field form-control password',
-						'placeholder' => '密码'));?>
-					<?php echo Form::submit('登录', array('class' => 'btn btn-login')); ?>
-					<?php echo Form::close(); ?>
-					<div class="login-links">
-						<a href="password_forgot.html">Forgot password?</a>
-						<br>
-						<a href="signup.html">Don't have an account? <strong>Sign Up</strong></a>
-					</div>
-				</div>
-			</div>
-			<div class="social-login row">
-				<div class="fb-login col-lg-6 col-md-12 animated flipInX">
-					<a href="#" class="btn btn-facebook btn-block">Connect with <strong>Facebook</strong></a>
-				</div>
-				<div class="twit-login col-lg-6 col-md-12 animated flipInX">
-					<a href="#" class="btn btn-twitter btn-block">Connect with <strong>Twitter</strong></a>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- END LOCKSCREEN BOX -->
-<!-- BEGIN MANDATORY SCRIPTS -->
-<script src="<?php echo Config::get('site.adminAssetsPath'); ?>plugins/jquery-1.11.js"></script>
-<script src="<?php echo Config::get('site.adminAssetsPath'); ?>plugins/jquery-migrate-1.2.1.js"></script>
-<script src="<?php echo Config::get('site.adminAssetsPath'); ?>plugins/jquery-ui/jquery-ui-1.10.4.min.js"></script>
-<script src="<?php echo Config::get('site.adminAssetsPath'); ?>plugins/bootstrap/bootstrap.min.js"></script>
-<!-- END MANDATORY SCRIPTS -->
-<!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script src="<?php echo Config::get('site.adminAssetsPath'); ?>plugins/backstretch/backstretch.min.js"></script>
-<script src="<?php echo Config::get('site.adminAssetsPath'); ?>js/account.js"></script>
-<!-- END PAGE LEVEL SCRIPTS -->
-</body>
+<body>
 
+<div class="container">
+
+	<?php echo Form::open(array('route' => 'adminLogin', 'class' => 'login-form')); ?>
+	<h2 class="login-form-heading">请登录</h2>
+
+	<div class="input-row">
+		<?php echo Form::text('username', null, array('id' => 'username', 'class' => 'form-control',
+			'placeholder' => '用户名',
+			'required',
+			'autofocus'));?>
+		<span class="glyphicon glyphicon-user"></span>
+	</div>
+	<div class="input-row">
+		<?php echo Form::password('password', array('id' => 'password', 'class' => 'form-control', 'placeholder' => '密码',
+			'required')); ?>
+		<span class="glyphicon glyphicon-lock"></span>
+	</div>
+	<div class="link-row">
+		<a href="#" class="pull-right">忘记密码了?</a>
+	</div>
+	<?php echo Form::submit('登录', array('class' => 'btn btn-lg btn-primary btn-block', 'id' => 'login-btn',
+		'data-loading-text' => "正在登录"));?>
+	<script>
+		$('#login-btn').click(function () {
+			var btn = $(this);
+			btn.button('loading');
+			$.ajax({
+				url: "{{ URL::route('adminLogin') }}",
+				data: {
+					"username": $('#username').val(),
+					"password": $('#password').val()
+				},
+				dataType: "json",
+				type: "POST",
+				success: function (data) {
+					if (data["status"] == "success") {
+						location.href = "{{ URL::route('adminDashboard') }}"
+					} else if (data["status"] == "error") {
+						alert(data["messages"]);
+					}
+				}
+			}).always(function () {
+				btn.button('reset')
+			});
+			return false;
+		});
+	</script>
+	<?php echo Form::close(); ?>
+
+</div>
+<!-- /container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+</body>
 </html>

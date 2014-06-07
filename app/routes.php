@@ -14,30 +14,42 @@
 Route::get('/', function () {
 	return View::make('hello');
 });
-Route::group(array('before' => 'auth'), function () {
+Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
 //	首页仪表盘
-	Route::get('admin', 'AdminIndexController@dashboard');
-	Route::get('admin/dashboard', 'AdminIndexController@dashboard');
+	Route::get('/', array('as' => 'adminDashboard', 'uses' => 'AdminIndexController@dashboard'));
+	Route::get('/dashboard', 'AdminIndexController@dashboard');
 //	文章
-	Route::get('admin/post', 'AdminPostController@listPost');
-	Route::get('admin/post/list', 'AdminPostController@listPost');
-	Route::get('admin/post/view/{id}', 'AdminPostController@viewPost');
-	Route::any('admin/post/edit/{id}', array('as' => 'adminPostEdit', 'uses' => 'AdminPostController@editPost'));
+	Route::get('/post', 'AdminPostController@listPost');
+	Route::get('/post/list', 'AdminPostController@listPost');
+	Route::get('/post/view/{id}', 'AdminPostController@viewPost');
+	Route::any('/post/edit/{id}', array('as' => 'adminPostEdit', 'uses' => 'AdminPostController@editPost'));
 //	分类
-	Route::get('admin/category', 'AdminCategoryController@listCategory');
-	Route::get('admin/category/list', 'AdminCategoryController@listCategory');
-	Route::get('admin/category/view/{id}', 'AdminCategoryController@viewCategory');
-	Route::any('admin/category/edit/{id}', 'AdminCategoryController@editCategory');
-	Route::any('admin/category/create', array('as' => 'adminCategoryCreate',
+	Route::get('/category', 'AdminCategoryController@listCategory');
+	Route::get('/category/list', 'AdminCategoryController@listCategory');
+	Route::get('/category/view/{id}', 'AdminCategoryController@viewCategory');
+	Route::any('/category/edit/{id}', 'AdminCategoryController@editCategory');
+	Route::any('/category/create', array('as' => 'adminCategoryCreate',
 		'uses' => 'AdminCategoryController@createCategory'));
 });
 
 Route::any('admin/login', array('as' => 'adminLogin', function () {
-	if (Input::has('username') && Input::has('password')) {
-		$username = Input::get('username');
-		$password = Input::get('password');
+	if (Request::ajax()) {
+		//接受请求数据
+		$username = Request::get('username');
+		$password = Request::get('password');
+		//验证请求数据
+		$validator = Validator::make(
+			array('username' => $username),
+
+			array('username' => 'required|min:5')
+		);
+		if ($validator->fails()) {
+			$result = json_encode(array('status' => 'error','messages'=>$validator->messages()->get('username')));
+			return $result;
+		}
 		if (Auth::attempt(array('username' => $username, 'password' => $password))) {
-			return Redirect::intended('admin');
+			$result = json_encode(array('status' => 'success'));
+			return $result;
 		}
 	}
 	return View::make('admin.login');

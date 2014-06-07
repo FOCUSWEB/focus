@@ -1,0 +1,45 @@
+body {
+  background: #eeeeee;
+}
+
+* {
+  font-family: 'Microsoft YaHei', serif;
+}
+
+.login-form {
+  @borderRadius: 5px;
+  @boxShadow_h: 10px;
+  @boxShadow_v: 10px;
+  @boxShadowBlur: 25px;
+  @boxShadowColor: #434343;
+  width: 400px;
+  margin: 180px auto;
+  padding: 20px;
+  border: solid 2px #aaaaaa;
+  -moz-border-radius: @borderRadius;
+  -webkit-border-radius: @borderRadius;
+  border-radius: @borderRadius;
+  -moz-box-shadow: @boxShadow_h @boxShadow_v @boxShadowBlur @boxShadowColor;
+  -webkit-box-shadow: @boxShadow_h @boxShadow_v @boxShadowBlur @boxShadowColor;
+  box-shadow: @boxShadow_h @boxShadow_v @boxShadowBlur @boxShadowColor;
+  h2.login-form-heading {
+	margin: 20px 0;
+  }
+  .input-row {
+	position: relative;
+	margin: 10px 0;
+	span {
+	  position: absolute;
+	  top: 10px;
+	  left: 10px;
+	}
+	input {
+	  padding-left: 30px;
+	}
+  }
+  .link-row {
+	a {
+	  margin-bottom: 10px;
+	}
+  }
+}
