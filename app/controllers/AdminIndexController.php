@@ -10,7 +10,6 @@ class AdminIndexController extends AdminController
 {
 	public function dashboard()
 	{
-
 		return View::make('admin.dashboard');
 	}
 }

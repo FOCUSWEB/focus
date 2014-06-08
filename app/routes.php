@@ -19,10 +19,12 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
 	Route::get('/', array('as' => 'adminDashboard', 'uses' => 'AdminIndexController@dashboard'));
 	Route::get('/dashboard', 'AdminIndexController@dashboard');
 //	文章
-	Route::get('/post', 'AdminPostController@listPost');
-	Route::get('/post/list', 'AdminPostController@listPost');
-	Route::get('/post/view/{id}', 'AdminPostController@viewPost');
-	Route::any('/post/edit/{id}', array('as' => 'adminPostEdit', 'uses' => 'AdminPostController@editPost'));
+	Route::group(array('prefix' => 'post'), function () {
+		Route::get('/', array('as' => 'adminPost', 'uses' => 'AdminPostController@listPost'));
+		Route::get('/list', array('as' => 'adminPostList', 'uses' => 'AdminPostController@listPost'));
+		Route::get('/view/{id}', 'AdminPostController@viewPost');
+		Route::any('/edit/{id}', array('as' => 'adminPostEdit', 'uses' => 'AdminPostController@editPost'));
+	});
 //	分类
 	Route::get('/category', 'AdminCategoryController@listCategory');
 	Route::get('/category/list', 'AdminCategoryController@listCategory');
@@ -32,28 +34,32 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
 		'uses' => 'AdminCategoryController@createCategory'));
 });
 
-Route::any('admin/login', array('as' => 'adminLogin', function () {
-	if (Request::ajax()) {
-		//接受请求数据
-		$username = Request::get('username');
-		$password = Request::get('password');
-		//验证请求数据
-		$validator = Validator::make(
-			array('username' => $username),
-
-			array('username' => 'required|min:5')
-		);
-		if ($validator->fails()) {
-			$result = json_encode(array('status' => 'error','messages'=>$validator->messages()->get('username')));
-			return $result;
-		}
-		if (Auth::attempt(array('username' => $username, 'password' => $password))) {
-			$result = json_encode(array('status' => 'success'));
-			return $result;
-		}
-	}
+Route::get('admin/login', array('as' => 'adminLogin', function () {
 	return View::make('admin.login');
 }));
+
+Route::post('admin/login', array('as' => 'adminLogin', function () {
+
+	$rules = array(
+		'username' => 'required|min:5',
+		'password' => 'required|min:5',
+	);
+	$validator = Validator::make(
+		Input::all(),
+		$rules
+	);
+	$validator->setAttributeNames(array(
+		'username' => '用户名',
+		'password' => '密码',
+	));
+	if ($validator->fails()) {
+		return Redirect::route('adminLogin')->withErrors($validator);
+	}
+	if (Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password')))) {
+		return Redirect::intended('admin');
+	}
+}));
+
 Route::get('admin/logout', function () {
 	Auth::logout();
 	return Redirect::intended('admin');

@@ -121,9 +121,9 @@ namespace {
 		 * @return \Illuminate\Support\ServiceProvider
 		 * @static 
 		 */
-		 public static function forgeRegister($provider, $options = array()){
+		 public static function forceRegister($provider, $options = array()){
 			//Method inherited from \Illuminate\Foundation\Application
-			return \Illuminate\Foundation\Application::forgeRegister($provider, $options);
+			return \Illuminate\Foundation\Application::forceRegister($provider, $options);
 		 }
 
 		/**
@@ -1486,6 +1486,17 @@ namespace {
 		 }
 
 		/**
+		 * Sets the default Command name.
+		 *
+		 * @param string $commandName The Command name
+		 * @static 
+		 */
+		 public static function setDefaultCommand($commandName){
+			//Method inherited from \Symfony\Component\Console\Application
+			 \Illuminate\Console\Application::setDefaultCommand($commandName);
+		 }
+
+		/**
 		 * Dynamically pass all missing methods to console Artisan.
 		 *
 		 * @param string  $method
@@ -1995,18 +2006,6 @@ namespace {
 		 }
 
 		/**
-		 * Register a custom Blade compiler.
-		 *
-		 * @param Closure  $compiler
-		 * @return void
-		 * @static 
-		 */
-		 public static function extend($compiler){
-			//Method inherited from \Illuminate\View\Compilers\BladeCompiler
-			 \Illuminate\View\Compilers\BladeCompiler::extend($compiler);
-		 }
-
-		/**
 		 * Compile the default values for the echo statement.
 		 *
 		 * @param string  $value
@@ -2016,6 +2015,18 @@ namespace {
 		 public static function compileEchoDefaults($value){
 			//Method inherited from \Illuminate\View\Compilers\BladeCompiler
 			return \Illuminate\View\Compilers\BladeCompiler::compileEchoDefaults($value);
+		 }
+
+		/**
+		 * Register a custom Blade compiler.
+		 *
+		 * @param Closure  $compiler
+		 * @return void
+		 * @static 
+		 */
+		 public static function extend($compiler){
+			//Method inherited from \Illuminate\View\Compilers\BladeCompiler
+			 \Illuminate\View\Compilers\BladeCompiler::extend($compiler);
 		 }
 
 		/**
@@ -2275,6 +2286,19 @@ namespace {
 		 }
 
 		/**
+		 * Retrieve an item from the cache and delete it.
+		 *
+		 * @param string  $key
+		 * @param mixed   $default
+		 * @return mixed
+		 * @static 
+		 */
+		 public static function pull($key, $default = null){
+			//Method inherited from \Illuminate\Cache\Repository
+			return \Illuminate\Cache\Repository::pull($key, $default);
+		 }
+
+		/**
 		 * Store an item in the cache.
 		 *
 		 * @param string  $key
@@ -2426,16 +2450,56 @@ namespace {
 		 }
 
 		/**
-		 * Register a macro with the Cache class.
+		 * Register a custom macro.
 		 *
 		 * @param string    $name
-		 * @param callable  $callback
+		 * @param callable  $macro
 		 * @return void
 		 * @static 
 		 */
-		 public static function macro($name, $callback){
+		 public static function macro($name, $macro){
 			//Method inherited from \Illuminate\Cache\Repository
-			 \Illuminate\Cache\Repository::macro($name, $callback);
+			 \Illuminate\Cache\Repository::macro($name, $macro);
+		 }
+
+		/**
+		 * Checks if macro is registered
+		 *
+		 * @param string    $name
+		 * @return boolean
+		 * @static 
+		 */
+		 public static function hasMacro($name){
+			//Method inherited from \Illuminate\Cache\Repository
+			return \Illuminate\Cache\Repository::hasMacro($name);
+		 }
+
+		/**
+		 * Dynamically handle calls to the class.
+		 *
+		 * @param string  $method
+		 * @param array   $parameters
+		 * @return mixed
+		 * @throws \BadMethodCallException
+		 * @static 
+		 */
+		 public static function __callStatic($method, $parameters){
+			//Method inherited from \Illuminate\Cache\Repository
+			return \Illuminate\Cache\Repository::__callStatic($method, $parameters);
+		 }
+
+		/**
+		 * Dynamically handle calls to the form builder.
+		 *
+		 * @param string  $method
+		 * @param array   $parameters
+		 * @return mixed
+		 * @throws \BadMethodCallException
+		 * @static 
+		 */
+		 public static function macroCall($method, $parameters){
+			//Method inherited from \Illuminate\Cache\Repository
+			return \Illuminate\Cache\Repository::macroCall($method, $parameters);
 		 }
 
 		/**
@@ -2866,7 +2930,7 @@ namespace {
 		/**
 		 * Remove a cookie from the queue.
 		 *
-		 * @param $cookieName
+		 * @param string $name
 		 * @static 
 		 */
 		 public static function unqueue($name){
@@ -3083,6 +3147,684 @@ namespace {
 			return \Illuminate\Database\DatabaseManager::__call($method, $parameters);
 		 }
 
+		/**
+		 * Get a schema builder instance for the connection.
+		 *
+		 * @return \Illuminate\Database\Schema\MySqlBuilder
+		 * @static 
+		 */
+		 public static function getSchemaBuilder(){
+			//Method inherited from \Illuminate\Database\MySqlConnection
+			return \Illuminate\Database\MySqlConnection::getSchemaBuilder();
+		 }
+
+		/**
+		 * Set the query grammar to the default implementation.
+		 *
+		 * @return void
+		 * @static 
+		 */
+		 public static function useDefaultQueryGrammar(){
+			//Method inherited from \Illuminate\Database\Connection
+			 \Illuminate\Database\MySqlConnection::useDefaultQueryGrammar();
+		 }
+
+		/**
+		 * Set the schema grammar to the default implementation.
+		 *
+		 * @return void
+		 * @static 
+		 */
+		 public static function useDefaultSchemaGrammar(){
+			//Method inherited from \Illuminate\Database\Connection
+			 \Illuminate\Database\MySqlConnection::useDefaultSchemaGrammar();
+		 }
+
+		/**
+		 * Set the query post processor to the default implementation.
+		 *
+		 * @return void
+		 * @static 
+		 */
+		 public static function useDefaultPostProcessor(){
+			//Method inherited from \Illuminate\Database\Connection
+			 \Illuminate\Database\MySqlConnection::useDefaultPostProcessor();
+		 }
+
+		/**
+		 * Begin a fluent query against a database table.
+		 *
+		 * @param string  $table
+		 * @return \Illuminate\Database\Query\Builder
+		 * @static 
+		 */
+		 public static function table($table){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::table($table);
+		 }
+
+		/**
+		 * Get a new raw query expression.
+		 *
+		 * @param mixed  $value
+		 * @return \Illuminate\Database\Query\Expression
+		 * @static 
+		 */
+		 public static function raw($value){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::raw($value);
+		 }
+
+		/**
+		 * Run a select statement and return a single result.
+		 *
+		 * @param string  $query
+		 * @param array   $bindings
+		 * @return mixed
+		 * @static 
+		 */
+		 public static function selectOne($query, $bindings = array()){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::selectOne($query, $bindings);
+		 }
+
+		/**
+		 * Run a select statement against the database.
+		 *
+		 * @param string  $query
+		 * @param array   $bindings
+		 * @return array
+		 * @static 
+		 */
+		 public static function select($query, $bindings = array()){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::select($query, $bindings);
+		 }
+
+		/**
+		 * Run an insert statement against the database.
+		 *
+		 * @param string  $query
+		 * @param array   $bindings
+		 * @return bool
+		 * @static 
+		 */
+		 public static function insert($query, $bindings = array()){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::insert($query, $bindings);
+		 }
+
+		/**
+		 * Run an update statement against the database.
+		 *
+		 * @param string  $query
+		 * @param array   $bindings
+		 * @return int
+		 * @static 
+		 */
+		 public static function update($query, $bindings = array()){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::update($query, $bindings);
+		 }
+
+		/**
+		 * Run a delete statement against the database.
+		 *
+		 * @param string  $query
+		 * @param array   $bindings
+		 * @return int
+		 * @static 
+		 */
+		 public static function delete($query, $bindings = array()){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::delete($query, $bindings);
+		 }
+
+		/**
+		 * Execute an SQL statement and return the boolean result.
+		 *
+		 * @param string  $query
+		 * @param array   $bindings
+		 * @return bool
+		 * @static 
+		 */
+		 public static function statement($query, $bindings = array()){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::statement($query, $bindings);
+		 }
+
+		/**
+		 * Run an SQL statement and get the number of rows affected.
+		 *
+		 * @param string  $query
+		 * @param array   $bindings
+		 * @return int
+		 * @static 
+		 */
+		 public static function affectingStatement($query, $bindings = array()){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::affectingStatement($query, $bindings);
+		 }
+
+		/**
+		 * Run a raw, unprepared query against the PDO connection.
+		 *
+		 * @param string  $query
+		 * @return bool
+		 * @static 
+		 */
+		 public static function unprepared($query){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::unprepared($query);
+		 }
+
+		/**
+		 * Prepare the query bindings for execution.
+		 *
+		 * @param array  $bindings
+		 * @return array
+		 * @static 
+		 */
+		 public static function prepareBindings($bindings){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::prepareBindings($bindings);
+		 }
+
+		/**
+		 * Execute a Closure within a transaction.
+		 *
+		 * @param Closure  $callback
+		 * @return mixed
+		 * @throws \Exception
+		 * @static 
+		 */
+		 public static function transaction($callback){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::transaction($callback);
+		 }
+
+		/**
+		 * Start a new database transaction.
+		 *
+		 * @return void
+		 * @static 
+		 */
+		 public static function beginTransaction(){
+			//Method inherited from \Illuminate\Database\Connection
+			 \Illuminate\Database\MySqlConnection::beginTransaction();
+		 }
+
+		/**
+		 * Commit the active database transaction.
+		 *
+		 * @return void
+		 * @static 
+		 */
+		 public static function commit(){
+			//Method inherited from \Illuminate\Database\Connection
+			 \Illuminate\Database\MySqlConnection::commit();
+		 }
+
+		/**
+		 * Rollback the active database transaction.
+		 *
+		 * @return void
+		 * @static 
+		 */
+		 public static function rollBack(){
+			//Method inherited from \Illuminate\Database\Connection
+			 \Illuminate\Database\MySqlConnection::rollBack();
+		 }
+
+		/**
+		 * Get the number of active transactions.
+		 *
+		 * @return int
+		 * @static 
+		 */
+		 public static function transactionLevel(){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::transactionLevel();
+		 }
+
+		/**
+		 * Execute the given callback in "dry run" mode.
+		 *
+		 * @param Closure  $callback
+		 * @return array
+		 * @static 
+		 */
+		 public static function pretend($callback){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::pretend($callback);
+		 }
+
+		/**
+		 * Log a query in the connection's query log.
+		 *
+		 * @param string  $query
+		 * @param array   $bindings
+		 * @param $time
+		 * @return void
+		 * @static 
+		 */
+		 public static function logQuery($query, $bindings, $time = null){
+			//Method inherited from \Illuminate\Database\Connection
+			 \Illuminate\Database\MySqlConnection::logQuery($query, $bindings, $time);
+		 }
+
+		/**
+		 * Register a database query listener with the connection.
+		 *
+		 * @param Closure  $callback
+		 * @return void
+		 * @static 
+		 */
+		 public static function listen($callback){
+			//Method inherited from \Illuminate\Database\Connection
+			 \Illuminate\Database\MySqlConnection::listen($callback);
+		 }
+
+		/**
+		 * Get a Doctrine Schema Column instance.
+		 *
+		 * @param string  $table
+		 * @param string  $column
+		 * @return \Doctrine\DBAL\Schema\Column
+		 * @static 
+		 */
+		 public static function getDoctrineColumn($table, $column){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::getDoctrineColumn($table, $column);
+		 }
+
+		/**
+		 * Get the Doctrine DBAL schema manager for the connection.
+		 *
+		 * @return \Doctrine\DBAL\Schema\AbstractSchemaManager
+		 * @static 
+		 */
+		 public static function getDoctrineSchemaManager(){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::getDoctrineSchemaManager();
+		 }
+
+		/**
+		 * Get the Doctrine DBAL database connection instance.
+		 *
+		 * @return \Doctrine\DBAL\Connection
+		 * @static 
+		 */
+		 public static function getDoctrineConnection(){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::getDoctrineConnection();
+		 }
+
+		/**
+		 * Get the current PDO connection.
+		 *
+		 * @return PDO
+		 * @static 
+		 */
+		 public static function getPdo(){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::getPdo();
+		 }
+
+		/**
+		 * Get the current PDO connection used for reading.
+		 *
+		 * @return PDO
+		 * @static 
+		 */
+		 public static function getReadPdo(){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::getReadPdo();
+		 }
+
+		/**
+		 * Set the PDO connection.
+		 *
+		 * @param PDO  $pdo
+		 * @return \Illuminate\Database\Connection
+		 * @static 
+		 */
+		 public static function setPdo($pdo){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::setPdo($pdo);
+		 }
+
+		/**
+		 * Set the PDO connection used for reading.
+		 *
+		 * @param PDO  $pdo
+		 * @return \Illuminate\Database\Connection
+		 * @static 
+		 */
+		 public static function setReadPdo($pdo){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::setReadPdo($pdo);
+		 }
+
+		/**
+		 * Get the database connection name.
+		 *
+		 * @return string|null
+		 * @static 
+		 */
+		 public static function getName(){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::getName();
+		 }
+
+		/**
+		 * Get an option from the configuration options.
+		 *
+		 * @param string  $option
+		 * @return mixed
+		 * @static 
+		 */
+		 public static function getConfig($option){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::getConfig($option);
+		 }
+
+		/**
+		 * Get the PDO driver name.
+		 *
+		 * @return string
+		 * @static 
+		 */
+		 public static function getDriverName(){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::getDriverName();
+		 }
+
+		/**
+		 * Get the query grammar used by the connection.
+		 *
+		 * @return \Illuminate\Database\Query\Grammars\Grammar
+		 * @static 
+		 */
+		 public static function getQueryGrammar(){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::getQueryGrammar();
+		 }
+
+		/**
+		 * Set the query grammar used by the connection.
+		 *
+		 * @param \Illuminate\Database\Query\Grammars\Grammar
+		 * @return void
+		 * @static 
+		 */
+		 public static function setQueryGrammar($grammar){
+			//Method inherited from \Illuminate\Database\Connection
+			 \Illuminate\Database\MySqlConnection::setQueryGrammar($grammar);
+		 }
+
+		/**
+		 * Get the schema grammar used by the connection.
+		 *
+		 * @return \Illuminate\Database\Query\Grammars\Grammar
+		 * @static 
+		 */
+		 public static function getSchemaGrammar(){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::getSchemaGrammar();
+		 }
+
+		/**
+		 * Set the schema grammar used by the connection.
+		 *
+		 * @param \Illuminate\Database\Schema\Grammars\Grammar
+		 * @return void
+		 * @static 
+		 */
+		 public static function setSchemaGrammar($grammar){
+			//Method inherited from \Illuminate\Database\Connection
+			 \Illuminate\Database\MySqlConnection::setSchemaGrammar($grammar);
+		 }
+
+		/**
+		 * Get the query post processor used by the connection.
+		 *
+		 * @return \Illuminate\Database\Query\Processors\Processor
+		 * @static 
+		 */
+		 public static function getPostProcessor(){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::getPostProcessor();
+		 }
+
+		/**
+		 * Set the query post processor used by the connection.
+		 *
+		 * @param \Illuminate\Database\Query\Processors\Processor
+		 * @return void
+		 * @static 
+		 */
+		 public static function setPostProcessor($processor){
+			//Method inherited from \Illuminate\Database\Connection
+			 \Illuminate\Database\MySqlConnection::setPostProcessor($processor);
+		 }
+
+		/**
+		 * Get the event dispatcher used by the connection.
+		 *
+		 * @return \Illuminate\Events\Dispatcher
+		 * @static 
+		 */
+		 public static function getEventDispatcher(){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::getEventDispatcher();
+		 }
+
+		/**
+		 * Set the event dispatcher instance on the connection.
+		 *
+		 * @param \Illuminate\Events\Dispatcher
+		 * @return void
+		 * @static 
+		 */
+		 public static function setEventDispatcher($events){
+			//Method inherited from \Illuminate\Database\Connection
+			 \Illuminate\Database\MySqlConnection::setEventDispatcher($events);
+		 }
+
+		/**
+		 * Get the paginator environment instance.
+		 *
+		 * @return \Illuminate\Pagination\Factory
+		 * @static 
+		 */
+		 public static function getPaginator(){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::getPaginator();
+		 }
+
+		/**
+		 * Set the pagination environment instance.
+		 *
+		 * @param \Illuminate\Pagination\Factory|\Closure  $paginator
+		 * @return void
+		 * @static 
+		 */
+		 public static function setPaginator($paginator){
+			//Method inherited from \Illuminate\Database\Connection
+			 \Illuminate\Database\MySqlConnection::setPaginator($paginator);
+		 }
+
+		/**
+		 * Get the cache manager instance.
+		 *
+		 * @return \Illuminate\Cache\CacheManager
+		 * @static 
+		 */
+		 public static function getCacheManager(){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::getCacheManager();
+		 }
+
+		/**
+		 * Set the cache manager instance on the connection.
+		 *
+		 * @param \Illuminate\Cache\CacheManager|\Closure  $cache
+		 * @return void
+		 * @static 
+		 */
+		 public static function setCacheManager($cache){
+			//Method inherited from \Illuminate\Database\Connection
+			 \Illuminate\Database\MySqlConnection::setCacheManager($cache);
+		 }
+
+		/**
+		 * Determine if the connection in a "dry run".
+		 *
+		 * @return bool
+		 * @static 
+		 */
+		 public static function pretending(){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::pretending();
+		 }
+
+		/**
+		 * Get the default fetch mode for the connection.
+		 *
+		 * @return int
+		 * @static 
+		 */
+		 public static function getFetchMode(){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::getFetchMode();
+		 }
+
+		/**
+		 * Set the default fetch mode for the connection.
+		 *
+		 * @param int  $fetchMode
+		 * @return int
+		 * @static 
+		 */
+		 public static function setFetchMode($fetchMode){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::setFetchMode($fetchMode);
+		 }
+
+		/**
+		 * Get the connection query log.
+		 *
+		 * @return array
+		 * @static 
+		 */
+		 public static function getQueryLog(){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::getQueryLog();
+		 }
+
+		/**
+		 * Clear the query log.
+		 *
+		 * @return void
+		 * @static 
+		 */
+		 public static function flushQueryLog(){
+			//Method inherited from \Illuminate\Database\Connection
+			 \Illuminate\Database\MySqlConnection::flushQueryLog();
+		 }
+
+		/**
+		 * Enable the query log on the connection.
+		 *
+		 * @return void
+		 * @static 
+		 */
+		 public static function enableQueryLog(){
+			//Method inherited from \Illuminate\Database\Connection
+			 \Illuminate\Database\MySqlConnection::enableQueryLog();
+		 }
+
+		/**
+		 * Disable the query log on the connection.
+		 *
+		 * @return void
+		 * @static 
+		 */
+		 public static function disableQueryLog(){
+			//Method inherited from \Illuminate\Database\Connection
+			 \Illuminate\Database\MySqlConnection::disableQueryLog();
+		 }
+
+		/**
+		 * Determine whether we're logging queries.
+		 *
+		 * @return bool
+		 * @static 
+		 */
+		 public static function logging(){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::logging();
+		 }
+
+		/**
+		 * Get the name of the connected database.
+		 *
+		 * @return string
+		 * @static 
+		 */
+		 public static function getDatabaseName(){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::getDatabaseName();
+		 }
+
+		/**
+		 * Set the name of the connected database.
+		 *
+		 * @param string  $database
+		 * @return string
+		 * @static 
+		 */
+		 public static function setDatabaseName($database){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::setDatabaseName($database);
+		 }
+
+		/**
+		 * Get the table prefix for the connection.
+		 *
+		 * @return string
+		 * @static 
+		 */
+		 public static function getTablePrefix(){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::getTablePrefix();
+		 }
+
+		/**
+		 * Set the table prefix in use by the connection.
+		 *
+		 * @param string  $prefix
+		 * @return void
+		 * @static 
+		 */
+		 public static function setTablePrefix($prefix){
+			//Method inherited from \Illuminate\Database\Connection
+			 \Illuminate\Database\MySqlConnection::setTablePrefix($prefix);
+		 }
+
+		/**
+		 * Set the table prefix and return the grammar.
+		 *
+		 * @param \Illuminate\Database\Grammar  $grammar
+		 * @return \Illuminate\Database\Grammar
+		 * @static 
+		 */
+		 public static function withTablePrefix($grammar){
+			//Method inherited from \Illuminate\Database\Connection
+			return \Illuminate\Database\MySqlConnection::withTablePrefix($grammar);
+		 }
+
 	}
 	class Eloquent extends \Illuminate\Database\Eloquent\Model{
 		/**
@@ -3187,6 +3929,22 @@ namespace {
 		 }
 
 		/**
+		 * Get a paginator only supporting simple next and previous links.
+		 * 
+		 * This is more efficient on larger data-sets, etc.
+		 *
+		 * @param \Illuminate\Pagination\Factory  $paginator
+		 * @param int    $perPage
+		 * @param array  $columns
+		 * @return \Illuminate\Pagination\Paginator
+		 * @static 
+		 */
+		 public static function simplePaginate($perPage = null, $columns = array()){
+			//Method inherited from \Illuminate\Database\Eloquent\Builder
+			return \Illuminate\Database\Eloquent\Builder::simplePaginate($perPage, $columns);
+		 }
+
+		/**
 		 * Increment a column's value by a given amount.
 		 *
 		 * @param string  $column
@@ -3212,6 +3970,29 @@ namespace {
 		 public static function decrement($column, $amount = 1, $extra = array()){
 			//Method inherited from \Illuminate\Database\Eloquent\Builder
 			return \Illuminate\Database\Eloquent\Builder::decrement($column, $amount, $extra);
+		 }
+
+		/**
+		 * Run the default delete function on the builder.
+		 *
+		 * @return mixed
+		 * @static 
+		 */
+		 public static function forceDelete(){
+			//Method inherited from \Illuminate\Database\Eloquent\Builder
+			return \Illuminate\Database\Eloquent\Builder::forceDelete();
+		 }
+
+		/**
+		 * Register a replacement for the default delete function.
+		 *
+		 * @param \Closure  $callback
+		 * @return void
+		 * @static 
+		 */
+		 public static function onDelete($callback){
+			//Method inherited from \Illuminate\Database\Eloquent\Builder
+			 \Illuminate\Database\Eloquent\Builder::onDelete($callback);
 		 }
 
 		/**
@@ -3394,6 +4175,31 @@ namespace {
 		 public static function setModel($model){
 			//Method inherited from \Illuminate\Database\Eloquent\Builder
 			return \Illuminate\Database\Eloquent\Builder::setModel($model);
+		 }
+
+		/**
+		 * Extend the builder with a given callback.
+		 *
+		 * @param string  $name
+		 * @param \Closure  $callback
+		 * @return void
+		 * @static 
+		 */
+		 public static function macro($name, $callback){
+			//Method inherited from \Illuminate\Database\Eloquent\Builder
+			 \Illuminate\Database\Eloquent\Builder::macro($name, $callback);
+		 }
+
+		/**
+		 * Get the given macro by name.
+		 *
+		 * @param string  $name
+		 * @return \Closure
+		 * @static 
+		 */
+		 public static function getMacro($name){
+			//Method inherited from \Illuminate\Database\Eloquent\Builder
+			return \Illuminate\Database\Eloquent\Builder::getMacro($name);
 		 }
 
 		/**
@@ -3860,12 +4666,27 @@ namespace {
 		 * @param string  $column
 		 * @param string  $operator
 		 * @param string  $value
+		 * @param string  $boolean
 		 * @return \Illuminate\Database\Query\Builder|static
 		 * @static 
 		 */
-		 public static function having($column, $operator = null, $value = null){
+		 public static function having($column, $operator = null, $value = null, $boolean = 'and'){
 			//Method inherited from \Illuminate\Database\Query\Builder
-			return \Illuminate\Database\Query\Builder::having($column, $operator, $value);
+			return \Illuminate\Database\Query\Builder::having($column, $operator, $value, $boolean);
+		 }
+
+		/**
+		 * Add a "or having" clause to the query.
+		 *
+		 * @param string  $column
+		 * @param string  $operator
+		 * @param string  $value
+		 * @return \Illuminate\Database\Query\Builder|static
+		 * @static 
+		 */
+		 public static function orHaving($column, $operator = null, $value = null){
+			//Method inherited from \Illuminate\Database\Query\Builder
+			return \Illuminate\Database\Query\Builder::orHaving($column, $operator, $value);
 		 }
 
 		/**
@@ -4187,7 +5008,7 @@ namespace {
 		/**
 		 * Build a paginator instance from a raw result array.
 		 *
-		 * @param \Illuminate\Pagination\Environment  $paginator
+		 * @param \Illuminate\Pagination\Factory  $paginator
 		 * @param array  $results
 		 * @param int    $perPage
 		 * @return \Illuminate\Pagination\Paginator
@@ -4355,7 +5176,7 @@ namespace {
 		 }
 
 		/**
-		 * Get the current query value bindings.
+		 * Get the current query value bindings in a flattened array.
 		 *
 		 * @return array
 		 * @static 
@@ -4366,27 +5187,40 @@ namespace {
 		 }
 
 		/**
+		 * Get the raw array of bindings.
+		 *
+		 * @return array
+		 * @static 
+		 */
+		 public static function getRawBindings(){
+			//Method inherited from \Illuminate\Database\Query\Builder
+			return \Illuminate\Database\Query\Builder::getRawBindings();
+		 }
+
+		/**
 		 * Set the bindings on the query builder.
 		 *
-		 * @param array  $bindings
+		 * @param array   $bindings
+		 * @param string  $type
 		 * @return \Illuminate\Database\Query\Builder
 		 * @static 
 		 */
-		 public static function setBindings($bindings){
+		 public static function setBindings($bindings, $type = 'where'){
 			//Method inherited from \Illuminate\Database\Query\Builder
-			return \Illuminate\Database\Query\Builder::setBindings($bindings);
+			return \Illuminate\Database\Query\Builder::setBindings($bindings, $type);
 		 }
 
 		/**
 		 * Add a binding to the query.
 		 *
-		 * @param mixed  $value
+		 * @param mixed   $value
+		 * @param string  $type
 		 * @return \Illuminate\Database\Query\Builder
 		 * @static 
 		 */
-		 public static function addBinding($value){
+		 public static function addBinding($value, $type = 'where'){
 			//Method inherited from \Illuminate\Database\Query\Builder
-			return \Illuminate\Database\Query\Builder::addBinding($value);
+			return \Illuminate\Database\Query\Builder::addBinding($value, $type);
 		 }
 
 		/**
@@ -4858,7 +5692,7 @@ namespace {
 		 * @return bool
 		 * @static 
 		 */
-		 public static function makeDirectory($path, $mode = 511, $recursive = false, $force = false){
+		 public static function makeDirectory($path, $mode = 493, $recursive = false, $force = false){
 			//Method inherited from \Illuminate\Filesystem\Filesystem
 			return \Illuminate\Filesystem\Filesystem::makeDirectory($path, $mode, $recursive, $force);
 		 }
@@ -5264,19 +6098,6 @@ namespace {
 		 }
 
 		/**
-		 * Register a custom form macro.
-		 *
-		 * @param string    $name
-		 * @param callable  $macro
-		 * @return void
-		 * @static 
-		 */
-		 public static function macro($name, $macro){
-			//Method inherited from \Illuminate\Html\FormBuilder
-			 \Illuminate\Html\FormBuilder::macro($name, $macro);
-		 }
-
-		/**
 		 * Get the ID attribute for a field name.
 		 *
 		 * @param string  $name
@@ -5349,6 +6170,45 @@ namespace {
 		 }
 
 		/**
+		 * Register a custom macro.
+		 *
+		 * @param string    $name
+		 * @param callable  $macro
+		 * @return void
+		 * @static 
+		 */
+		 public static function macro($name, $macro){
+			//Method inherited from \Illuminate\Html\FormBuilder
+			 \Illuminate\Html\FormBuilder::macro($name, $macro);
+		 }
+
+		/**
+		 * Checks if macro is registered
+		 *
+		 * @param string    $name
+		 * @return boolean
+		 * @static 
+		 */
+		 public static function hasMacro($name){
+			//Method inherited from \Illuminate\Html\FormBuilder
+			return \Illuminate\Html\FormBuilder::hasMacro($name);
+		 }
+
+		/**
+		 * Dynamically handle calls to the class.
+		 *
+		 * @param string  $method
+		 * @param array   $parameters
+		 * @return mixed
+		 * @throws \BadMethodCallException
+		 * @static 
+		 */
+		 public static function __callStatic($method, $parameters){
+			//Method inherited from \Illuminate\Html\FormBuilder
+			return \Illuminate\Html\FormBuilder::__callStatic($method, $parameters);
+		 }
+
+		/**
 		 * Dynamically handle calls to the form builder.
 		 *
 		 * @param string  $method
@@ -5417,19 +6277,6 @@ namespace {
 		 public static function __construct($url = null){
 			//Method inherited from \Illuminate\Html\HtmlBuilder
 			 \Illuminate\Html\HtmlBuilder::__construct($url);
-		 }
-
-		/**
-		 * Register a custom HTML macro.
-		 *
-		 * @param string    $name
-		 * @param callable  $macro
-		 * @return void
-		 * @static 
-		 */
-		 public static function macro($name, $macro){
-			//Method inherited from \Illuminate\Html\HtmlBuilder
-			 \Illuminate\Html\HtmlBuilder::macro($name, $macro);
 		 }
 
 		/**
@@ -5664,7 +6511,46 @@ namespace {
 		 }
 
 		/**
-		 * Dynamically handle calls to the html class.
+		 * Register a custom macro.
+		 *
+		 * @param string    $name
+		 * @param callable  $macro
+		 * @return void
+		 * @static 
+		 */
+		 public static function macro($name, $macro){
+			//Method inherited from \Illuminate\Html\HtmlBuilder
+			 \Illuminate\Html\HtmlBuilder::macro($name, $macro);
+		 }
+
+		/**
+		 * Checks if macro is registered
+		 *
+		 * @param string    $name
+		 * @return boolean
+		 * @static 
+		 */
+		 public static function hasMacro($name){
+			//Method inherited from \Illuminate\Html\HtmlBuilder
+			return \Illuminate\Html\HtmlBuilder::hasMacro($name);
+		 }
+
+		/**
+		 * Dynamically handle calls to the class.
+		 *
+		 * @param string  $method
+		 * @param array   $parameters
+		 * @return mixed
+		 * @throws \BadMethodCallException
+		 * @static 
+		 */
+		 public static function __callStatic($method, $parameters){
+			//Method inherited from \Illuminate\Html\HtmlBuilder
+			return \Illuminate\Html\HtmlBuilder::__callStatic($method, $parameters);
+		 }
+
+		/**
+		 * Dynamically handle calls to the form builder.
 		 *
 		 * @param string  $method
 		 * @param array   $parameters
@@ -7334,6 +8220,19 @@ namespace {
 		 }
 
 		/**
+		 * Register an error_log handler.
+		 *
+		 * @param integer $messageType
+		 * @param string  $level
+		 * @return void
+		 * @static 
+		 */
+		 public static function useErrorLog($level = 'debug', $messageType = 0){
+			//Method inherited from \Illuminate\Log\Writer
+			 \Illuminate\Log\Writer::useErrorLog($level, $messageType);
+		 }
+
+		/**
 		 * Register a new callback handler for when
 		 * a log event is triggered.
 		 *
@@ -7397,7 +8296,7 @@ namespace {
 		 * Dynamically handle error additions.
 		 *
 		 * @param string  $method
-		 * @param array   $parameters
+		 * @param mixed   $parameters
 		 * @return mixed
 		 * @throws \BadMethodCallException
 		 * @static 
@@ -7516,14 +8415,14 @@ namespace {
 		/**
 		 * Create a new Mailer instance.
 		 *
-		 * @param \Illuminate\View\Environment  $views
+		 * @param \Illuminate\View\Factory  $views
 		 * @param \Swift_Mailer  $swift
 		 * @return void
 		 * @static 
 		 */
-		 public static function __construct($views, $swift){
+		 public static function __construct($views, $swift, $events = null){
 			//Method inherited from \Illuminate\Mail\Mailer
-			 \Illuminate\Mail\Mailer::__construct($views, $swift);
+			 \Illuminate\Mail\Mailer::__construct($views, $swift, $events);
 		 }
 
 		/**
@@ -7655,14 +8554,14 @@ namespace {
 		 }
 
 		/**
-		 * Get the view environment instance.
+		 * Get the view factory instance.
 		 *
-		 * @return \Illuminate\View\Environment
+		 * @return \Illuminate\View\Factory
 		 * @static 
 		 */
-		 public static function getViewEnvironment(){
+		 public static function getViewFactory(){
 			//Method inherited from \Illuminate\Mail\Mailer
-			return \Illuminate\Mail\Mailer::getViewEnvironment();
+			return \Illuminate\Mail\Mailer::getViewFactory();
 		 }
 
 		/**
@@ -7738,18 +8637,18 @@ namespace {
 	}
 	class Paginator extends \Illuminate\Support\Facades\Paginator{
 		/**
-		 * Create a new pagination environment.
+		 * Create a new pagination factory.
 		 *
 		 * @param \Symfony\Component\HttpFoundation\Request  $request
-		 * @param \Illuminate\View\Environment  $view
+		 * @param \Illuminate\View\Factory  $view
 		 * @param \Symfony\Component\Translation\TranslatorInterface  $trans
 		 * @param string  $pageName
 		 * @return void
 		 * @static 
 		 */
 		 public static function __construct($request, $view, $trans, $pageName = 'page'){
-			//Method inherited from \Illuminate\Pagination\Environment
-			 \Illuminate\Pagination\Environment::__construct($request, $view, $trans, $pageName);
+			//Method inherited from \Illuminate\Pagination\Factory
+			 \Illuminate\Pagination\Factory::__construct($request, $view, $trans, $pageName);
 		 }
 
 		/**
@@ -7757,13 +8656,13 @@ namespace {
 		 *
 		 * @param array  $items
 		 * @param int    $total
-		 * @param int    $perPage
+		 * @param int|null  $perPage
 		 * @return \Illuminate\Pagination\Paginator
 		 * @static 
 		 */
-		 public static function make($items, $total, $perPage){
-			//Method inherited from \Illuminate\Pagination\Environment
-			return \Illuminate\Pagination\Environment::make($items, $total, $perPage);
+		 public static function make($items, $total, $perPage = null){
+			//Method inherited from \Illuminate\Pagination\Factory
+			return \Illuminate\Pagination\Factory::make($items, $total, $perPage);
 		 }
 
 		/**
@@ -7775,8 +8674,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getPaginationView($paginator, $view = null){
-			//Method inherited from \Illuminate\Pagination\Environment
-			return \Illuminate\Pagination\Environment::getPaginationView($paginator, $view);
+			//Method inherited from \Illuminate\Pagination\Factory
+			return \Illuminate\Pagination\Factory::getPaginationView($paginator, $view);
 		 }
 
 		/**
@@ -7786,8 +8685,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getCurrentPage(){
-			//Method inherited from \Illuminate\Pagination\Environment
-			return \Illuminate\Pagination\Environment::getCurrentPage();
+			//Method inherited from \Illuminate\Pagination\Factory
+			return \Illuminate\Pagination\Factory::getCurrentPage();
 		 }
 
 		/**
@@ -7798,8 +8697,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function setCurrentPage($number){
-			//Method inherited from \Illuminate\Pagination\Environment
-			 \Illuminate\Pagination\Environment::setCurrentPage($number);
+			//Method inherited from \Illuminate\Pagination\Factory
+			 \Illuminate\Pagination\Factory::setCurrentPage($number);
 		 }
 
 		/**
@@ -7809,8 +8708,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getCurrentUrl(){
-			//Method inherited from \Illuminate\Pagination\Environment
-			return \Illuminate\Pagination\Environment::getCurrentUrl();
+			//Method inherited from \Illuminate\Pagination\Factory
+			return \Illuminate\Pagination\Factory::getCurrentUrl();
 		 }
 
 		/**
@@ -7821,8 +8720,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function setBaseUrl($baseUrl){
-			//Method inherited from \Illuminate\Pagination\Environment
-			 \Illuminate\Pagination\Environment::setBaseUrl($baseUrl);
+			//Method inherited from \Illuminate\Pagination\Factory
+			 \Illuminate\Pagination\Factory::setBaseUrl($baseUrl);
 		 }
 
 		/**
@@ -7833,8 +8732,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function setPageName($pageName){
-			//Method inherited from \Illuminate\Pagination\Environment
-			 \Illuminate\Pagination\Environment::setPageName($pageName);
+			//Method inherited from \Illuminate\Pagination\Factory
+			 \Illuminate\Pagination\Factory::setPageName($pageName);
 		 }
 
 		/**
@@ -7844,8 +8743,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getPageName(){
-			//Method inherited from \Illuminate\Pagination\Environment
-			return \Illuminate\Pagination\Environment::getPageName();
+			//Method inherited from \Illuminate\Pagination\Factory
+			return \Illuminate\Pagination\Factory::getPageName();
 		 }
 
 		/**
@@ -7856,8 +8755,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getViewName($view = null){
-			//Method inherited from \Illuminate\Pagination\Environment
-			return \Illuminate\Pagination\Environment::getViewName($view);
+			//Method inherited from \Illuminate\Pagination\Factory
+			return \Illuminate\Pagination\Factory::getViewName($view);
 		 }
 
 		/**
@@ -7868,8 +8767,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function setViewName($viewName){
-			//Method inherited from \Illuminate\Pagination\Environment
-			 \Illuminate\Pagination\Environment::setViewName($viewName);
+			//Method inherited from \Illuminate\Pagination\Factory
+			 \Illuminate\Pagination\Factory::setViewName($viewName);
 		 }
 
 		/**
@@ -7879,8 +8778,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getLocale(){
-			//Method inherited from \Illuminate\Pagination\Environment
-			return \Illuminate\Pagination\Environment::getLocale();
+			//Method inherited from \Illuminate\Pagination\Factory
+			return \Illuminate\Pagination\Factory::getLocale();
 		 }
 
 		/**
@@ -7891,8 +8790,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function setLocale($locale){
-			//Method inherited from \Illuminate\Pagination\Environment
-			 \Illuminate\Pagination\Environment::setLocale($locale);
+			//Method inherited from \Illuminate\Pagination\Factory
+			 \Illuminate\Pagination\Factory::setLocale($locale);
 		 }
 
 		/**
@@ -7902,8 +8801,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getRequest(){
-			//Method inherited from \Illuminate\Pagination\Environment
-			return \Illuminate\Pagination\Environment::getRequest();
+			//Method inherited from \Illuminate\Pagination\Factory
+			return \Illuminate\Pagination\Factory::getRequest();
 		 }
 
 		/**
@@ -7914,31 +8813,31 @@ namespace {
 		 * @static 
 		 */
 		 public static function setRequest($request){
-			//Method inherited from \Illuminate\Pagination\Environment
-			 \Illuminate\Pagination\Environment::setRequest($request);
+			//Method inherited from \Illuminate\Pagination\Factory
+			 \Illuminate\Pagination\Factory::setRequest($request);
 		 }
 
 		/**
-		 * Get the current view driver.
+		 * Get the current view factory.
 		 *
-		 * @return \Illuminate\View\Environment
+		 * @return \Illuminate\View\Factory
 		 * @static 
 		 */
-		 public static function getViewDriver(){
-			//Method inherited from \Illuminate\Pagination\Environment
-			return \Illuminate\Pagination\Environment::getViewDriver();
+		 public static function getViewFactory(){
+			//Method inherited from \Illuminate\Pagination\Factory
+			return \Illuminate\Pagination\Factory::getViewFactory();
 		 }
 
 		/**
-		 * Set the current view driver.
+		 * Set the current view factory.
 		 *
-		 * @param \Illuminate\View\Environment  $view
+		 * @param \Illuminate\View\Factory  $view
 		 * @return void
 		 * @static 
 		 */
-		 public static function setViewDriver($view){
-			//Method inherited from \Illuminate\Pagination\Environment
-			 \Illuminate\Pagination\Environment::setViewDriver($view);
+		 public static function setViewFactory($view){
+			//Method inherited from \Illuminate\Pagination\Factory
+			 \Illuminate\Pagination\Factory::setViewFactory($view);
 		 }
 
 		/**
@@ -7948,8 +8847,90 @@ namespace {
 		 * @static 
 		 */
 		 public static function getTranslator(){
-			//Method inherited from \Illuminate\Pagination\Environment
-			return \Illuminate\Pagination\Environment::getTranslator();
+			//Method inherited from \Illuminate\Pagination\Factory
+			return \Illuminate\Pagination\Factory::getTranslator();
+		 }
+
+	}
+	class Password extends \Illuminate\Support\Facades\Password{
+		/**
+		 * Create a new password broker instance.
+		 *
+		 * @param \Illuminate\Auth\Reminders\ReminderRepositoryInterface  $reminders
+		 * @param \Illuminate\Auth\UserProviderInterface  $users
+		 * @param \Illuminate\Mail\Mailer  $mailer
+		 * @param string  $reminderView
+		 * @return void
+		 * @static 
+		 */
+		 public static function __construct($reminders, $users, $mailer, $reminderView){
+			//Method inherited from \Illuminate\Auth\Reminders\PasswordBroker
+			 \Illuminate\Auth\Reminders\PasswordBroker::__construct($reminders, $users, $mailer, $reminderView);
+		 }
+
+		/**
+		 * Send a password reminder to a user.
+		 *
+		 * @param array    $credentials
+		 * @param Closure  $callback
+		 * @return string
+		 * @static 
+		 */
+		 public static function remind($credentials, $callback = null){
+			//Method inherited from \Illuminate\Auth\Reminders\PasswordBroker
+			return \Illuminate\Auth\Reminders\PasswordBroker::remind($credentials, $callback);
+		 }
+
+		/**
+		 * Send the password reminder e-mail.
+		 *
+		 * @param \Illuminate\Auth\Reminders\RemindableInterface  $user
+		 * @param string   $token
+		 * @param Closure  $callback
+		 * @return int
+		 * @static 
+		 */
+		 public static function sendReminder($user, $token, $callback = null){
+			//Method inherited from \Illuminate\Auth\Reminders\PasswordBroker
+			return \Illuminate\Auth\Reminders\PasswordBroker::sendReminder($user, $token, $callback);
+		 }
+
+		/**
+		 * Reset the password for the given token.
+		 *
+		 * @param array    $credentials
+		 * @param Closure  $callback
+		 * @return mixed
+		 * @static 
+		 */
+		 public static function reset($credentials, $callback){
+			//Method inherited from \Illuminate\Auth\Reminders\PasswordBroker
+			return \Illuminate\Auth\Reminders\PasswordBroker::reset($credentials, $callback);
+		 }
+
+		/**
+		 * Set a custom password validator.
+		 *
+		 * @param \Closure  $callback
+		 * @return void
+		 * @static 
+		 */
+		 public static function validator($callback){
+			//Method inherited from \Illuminate\Auth\Reminders\PasswordBroker
+			 \Illuminate\Auth\Reminders\PasswordBroker::validator($callback);
+		 }
+
+		/**
+		 * Get the user for the given credentials.
+		 *
+		 * @param array  $credentials
+		 * @return \Illuminate\Auth\Reminders\RemindableInterface
+		 * @throws \UnexpectedValueException
+		 * @static 
+		 */
+		 public static function getUser($credentials){
+			//Method inherited from \Illuminate\Auth\Reminders\PasswordBroker
+			return \Illuminate\Auth\Reminders\PasswordBroker::getUser($credentials);
 		 }
 
 	}
@@ -7967,6 +8948,18 @@ namespace {
 		 }
 
 		/**
+		 * Register an event listener for the daemon queue loop.
+		 *
+		 * @param mixed  $callback
+		 * @return void
+		 * @static 
+		 */
+		 public static function looping($callback){
+			//Method inherited from \Illuminate\Queue\QueueManager
+			 \Illuminate\Queue\QueueManager::looping($callback);
+		 }
+
+		/**
 		 * Register an event listener for the failed job event.
 		 *
 		 * @param mixed  $callback
@@ -7976,6 +8969,18 @@ namespace {
 		 public static function failing($callback){
 			//Method inherited from \Illuminate\Queue\QueueManager
 			 \Illuminate\Queue\QueueManager::failing($callback);
+		 }
+
+		/**
+		 * Register an event listener for the daemon queue stopping.
+		 *
+		 * @param mixed  $callback
+		 * @return void
+		 * @static 
+		 */
+		 public static function stopping($callback){
+			//Method inherited from \Illuminate\Queue\QueueManager
+			 \Illuminate\Queue\QueueManager::stopping($callback);
 		 }
 
 		/**
@@ -8177,6 +9182,18 @@ namespace {
 		 public static function setContainer($container){
 			//Method inherited from \Illuminate\Queue\Queue
 			 \Illuminate\Queue\SyncQueue::setContainer($container);
+		 }
+
+		/**
+		 * Set the encrypter instance.
+		 *
+		 * @param \Illuminate\Encryption\Encrypter  $crypt
+		 * @return void
+		 * @static 
+		 */
+		 public static function setEncrypter($crypt){
+			//Method inherited from \Illuminate\Queue\Queue
+			 \Illuminate\Queue\SyncQueue::setEncrypter($crypt);
 		 }
 
 	}
@@ -10334,9 +11351,9 @@ namespace {
 		 * @return bool
 		 * @static 
 		 */
-		 public static function isAction(){
+		 public static function uses(){
 			//Method inherited from \Illuminate\Routing\Router
-			return \Illuminate\Routing\Router::isAction();
+			return \Illuminate\Routing\Router::uses();
 		 }
 
 		/**
@@ -10417,6 +11434,155 @@ namespace {
 		 public static function handle($request, $type = 1, $catch = true){
 			//Method inherited from \Illuminate\Routing\Router
 			return \Illuminate\Routing\Router::handle($request, $type, $catch);
+		 }
+
+	}
+	class Schema extends \Illuminate\Support\Facades\Schema{
+		/**
+		 * Determine if the given table exists.
+		 *
+		 * @param string  $table
+		 * @return bool
+		 * @static 
+		 */
+		 public static function hasTable($table){
+			//Method inherited from \Illuminate\Database\Schema\MySqlBuilder
+			return \Illuminate\Database\Schema\MySqlBuilder::hasTable($table);
+		 }
+
+		/**
+		 * Get the column listing for a given table.
+		 *
+		 * @param string  $table
+		 * @return array
+		 * @static 
+		 */
+		 public static function getColumnListing($table){
+			//Method inherited from \Illuminate\Database\Schema\MySqlBuilder
+			return \Illuminate\Database\Schema\MySqlBuilder::getColumnListing($table);
+		 }
+
+		/**
+		 * Create a new database Schema manager.
+		 *
+		 * @param \Illuminate\Database\Connection  $connection
+		 * @return void
+		 * @static 
+		 */
+		 public static function __construct($connection){
+			//Method inherited from \Illuminate\Database\Schema\Builder
+			 \Illuminate\Database\Schema\MySqlBuilder::__construct($connection);
+		 }
+
+		/**
+		 * Determine if the given table has a given column.
+		 *
+		 * @param string  $table
+		 * @param string  $column
+		 * @return bool
+		 * @static 
+		 */
+		 public static function hasColumn($table, $column){
+			//Method inherited from \Illuminate\Database\Schema\Builder
+			return \Illuminate\Database\Schema\MySqlBuilder::hasColumn($table, $column);
+		 }
+
+		/**
+		 * Modify a table on the schema.
+		 *
+		 * @param string   $table
+		 * @param Closure  $callback
+		 * @return \Illuminate\Database\Schema\Blueprint
+		 * @static 
+		 */
+		 public static function table($table, $callback){
+			//Method inherited from \Illuminate\Database\Schema\Builder
+			return \Illuminate\Database\Schema\MySqlBuilder::table($table, $callback);
+		 }
+
+		/**
+		 * Create a new table on the schema.
+		 *
+		 * @param string   $table
+		 * @param Closure  $callback
+		 * @return \Illuminate\Database\Schema\Blueprint
+		 * @static 
+		 */
+		 public static function create($table, $callback){
+			//Method inherited from \Illuminate\Database\Schema\Builder
+			return \Illuminate\Database\Schema\MySqlBuilder::create($table, $callback);
+		 }
+
+		/**
+		 * Drop a table from the schema.
+		 *
+		 * @param string  $table
+		 * @return \Illuminate\Database\Schema\Blueprint
+		 * @static 
+		 */
+		 public static function drop($table){
+			//Method inherited from \Illuminate\Database\Schema\Builder
+			return \Illuminate\Database\Schema\MySqlBuilder::drop($table);
+		 }
+
+		/**
+		 * Drop a table from the schema if it exists.
+		 *
+		 * @param string  $table
+		 * @return \Illuminate\Database\Schema\Blueprint
+		 * @static 
+		 */
+		 public static function dropIfExists($table){
+			//Method inherited from \Illuminate\Database\Schema\Builder
+			return \Illuminate\Database\Schema\MySqlBuilder::dropIfExists($table);
+		 }
+
+		/**
+		 * Rename a table on the schema.
+		 *
+		 * @param string  $from
+		 * @param string  $to
+		 * @return \Illuminate\Database\Schema\Blueprint
+		 * @static 
+		 */
+		 public static function rename($from, $to){
+			//Method inherited from \Illuminate\Database\Schema\Builder
+			return \Illuminate\Database\Schema\MySqlBuilder::rename($from, $to);
+		 }
+
+		/**
+		 * Get the database connection instance.
+		 *
+		 * @return \Illuminate\Database\Connection
+		 * @static 
+		 */
+		 public static function getConnection(){
+			//Method inherited from \Illuminate\Database\Schema\Builder
+			return \Illuminate\Database\Schema\MySqlBuilder::getConnection();
+		 }
+
+		/**
+		 * Set the database connection instance.
+		 *
+		 * @param \Illuminate\Database\Connection
+		 * @return \Illuminate\Database\Schema\Builder
+		 * @static 
+		 */
+		 public static function setConnection($connection){
+			//Method inherited from \Illuminate\Database\Schema\Builder
+			return \Illuminate\Database\Schema\MySqlBuilder::setConnection($connection);
+		 }
+
+		/**
+		 * Set the Schema Blueprint resolver callback.
+		 *
+		 * @param \Closure  $resolver
+		 * @return void
+		 * @static 
+		 */
+		 public static function blueprintResolver($resolver){
+			//Method inherited from \Illuminate\Database\Schema\Builder
+			 \Illuminate\Database\Schema\MySqlBuilder::blueprintResolver($resolver);
 		 }
 
 	}
@@ -10678,6 +11844,19 @@ namespace {
 		 public static function get($name, $default = null){
 			//Method inherited from \Illuminate\Session\Store
 			return \Illuminate\Session\Store::get($name, $default);
+		 }
+
+		/**
+		 * Get the value of a given key and then forget it.
+		 *
+		 * @param string  $key
+		 * @param string  $default
+		 * @return mixed
+		 * @static 
+		 */
+		 public static function pull($key, $default = null){
+			//Method inherited from \Illuminate\Session\Store
+			return \Illuminate\Session\Store::pull($key, $default);
 		 }
 
 		/**
@@ -10953,6 +12132,18 @@ namespace {
 		 }
 
 		/**
+		 * Set the existence of the session on the handler if applicable.
+		 *
+		 * @param bool  $value
+		 * @return void
+		 * @static 
+		 */
+		 public static function setExists($value){
+			//Method inherited from \Illuminate\Session\Store
+			 \Illuminate\Session\Store::setExists($value);
+		 }
+
+		/**
 		 * Get the underlying session handler implementation.
 		 *
 		 * @return \SessionHandlerInterface
@@ -11199,6 +12390,18 @@ namespace {
 		 }
 
 		/**
+		 * Force the schema for URLs.
+		 *
+		 * @param string  $schema
+		 * @return void
+		 * @static 
+		 */
+		 public static function forceSchema($schema){
+			//Method inherited from \Illuminate\Routing\UrlGenerator
+			 \Illuminate\Routing\UrlGenerator::forceSchema($schema);
+		 }
+
+		/**
 		 * Get the URL to a named route.
 		 *
 		 * @param string  $name
@@ -11226,6 +12429,18 @@ namespace {
 		 public static function action($action, $parameters = array(), $absolute = true){
 			//Method inherited from \Illuminate\Routing\UrlGenerator
 			return \Illuminate\Routing\UrlGenerator::action($action, $parameters, $absolute);
+		 }
+
+		/**
+		 * Set the forced root URL.
+		 *
+		 * @param string  $root
+		 * @return void
+		 * @static 
+		 */
+		 public static function forceRootUrl($root){
+			//Method inherited from \Illuminate\Routing\UrlGenerator
+			 \Illuminate\Routing\UrlGenerator::forceRootUrl($root);
 		 }
 
 		/**
@@ -11383,7 +12598,7 @@ namespace {
 	}
 	class View extends \Illuminate\Support\Facades\View{
 		/**
-		 * Create a new view environment instance.
+		 * Create a new view factory instance.
 		 *
 		 * @param \Illuminate\View\Engines\EngineResolver  $engines
 		 * @param \Illuminate\View\ViewFinderInterface  $finder
@@ -11392,8 +12607,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function __construct($engines, $finder, $events){
-			//Method inherited from \Illuminate\View\Environment
-			 \Illuminate\View\Environment::__construct($engines, $finder, $events);
+			//Method inherited from \Illuminate\View\Factory
+			 \Illuminate\View\Factory::__construct($engines, $finder, $events);
 		 }
 
 		/**
@@ -11406,8 +12621,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function make($view, $data = array(), $mergeData = array()){
-			//Method inherited from \Illuminate\View\Environment
-			return \Illuminate\View\Environment::make($view, $data, $mergeData);
+			//Method inherited from \Illuminate\View\Factory
+			return \Illuminate\View\Factory::make($view, $data, $mergeData);
 		 }
 
 		/**
@@ -11419,8 +12634,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function of($view, $data = array()){
-			//Method inherited from \Illuminate\View\Environment
-			return \Illuminate\View\Environment::of($view, $data);
+			//Method inherited from \Illuminate\View\Factory
+			return \Illuminate\View\Factory::of($view, $data);
 		 }
 
 		/**
@@ -11432,8 +12647,21 @@ namespace {
 		 * @static 
 		 */
 		 public static function name($view, $name){
-			//Method inherited from \Illuminate\View\Environment
-			 \Illuminate\View\Environment::name($view, $name);
+			//Method inherited from \Illuminate\View\Factory
+			 \Illuminate\View\Factory::name($view, $name);
+		 }
+
+		/**
+		 * Add an alias for a view.
+		 *
+		 * @param string  $view
+		 * @param string  $alias
+		 * @return void
+		 * @static 
+		 */
+		 public static function alias($view, $alias){
+			//Method inherited from \Illuminate\View\Factory
+			 \Illuminate\View\Factory::alias($view, $alias);
 		 }
 
 		/**
@@ -11444,8 +12672,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function exists($view){
-			//Method inherited from \Illuminate\View\Environment
-			return \Illuminate\View\Environment::exists($view);
+			//Method inherited from \Illuminate\View\Factory
+			return \Illuminate\View\Factory::exists($view);
 		 }
 
 		/**
@@ -11459,8 +12687,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function renderEach($view, $data, $iterator, $empty = 'raw|'){
-			//Method inherited from \Illuminate\View\Environment
-			return \Illuminate\View\Environment::renderEach($view, $data, $iterator, $empty);
+			//Method inherited from \Illuminate\View\Factory
+			return \Illuminate\View\Factory::renderEach($view, $data, $iterator, $empty);
 		 }
 
 		/**
@@ -11472,8 +12700,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function share($key, $value = null){
-			//Method inherited from \Illuminate\View\Environment
-			 \Illuminate\View\Environment::share($key, $value);
+			//Method inherited from \Illuminate\View\Factory
+			 \Illuminate\View\Factory::share($key, $value);
 		 }
 
 		/**
@@ -11485,8 +12713,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function creator($views, $callback){
-			//Method inherited from \Illuminate\View\Environment
-			return \Illuminate\View\Environment::creator($views, $callback);
+			//Method inherited from \Illuminate\View\Factory
+			return \Illuminate\View\Factory::creator($views, $callback);
 		 }
 
 		/**
@@ -11497,8 +12725,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function composers($composers){
-			//Method inherited from \Illuminate\View\Environment
-			return \Illuminate\View\Environment::composers($composers);
+			//Method inherited from \Illuminate\View\Factory
+			return \Illuminate\View\Factory::composers($composers);
 		 }
 
 		/**
@@ -11510,8 +12738,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function composer($views, $callback, $priority = null){
-			//Method inherited from \Illuminate\View\Environment
-			return \Illuminate\View\Environment::composer($views, $callback, $priority);
+			//Method inherited from \Illuminate\View\Factory
+			return \Illuminate\View\Factory::composer($views, $callback, $priority);
 		 }
 
 		/**
@@ -11522,8 +12750,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function callComposer($view){
-			//Method inherited from \Illuminate\View\Environment
-			 \Illuminate\View\Environment::callComposer($view);
+			//Method inherited from \Illuminate\View\Factory
+			 \Illuminate\View\Factory::callComposer($view);
 		 }
 
 		/**
@@ -11534,8 +12762,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function callCreator($view){
-			//Method inherited from \Illuminate\View\Environment
-			 \Illuminate\View\Environment::callCreator($view);
+			//Method inherited from \Illuminate\View\Factory
+			 \Illuminate\View\Factory::callCreator($view);
 		 }
 
 		/**
@@ -11547,8 +12775,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function startSection($section, $content = ''){
-			//Method inherited from \Illuminate\View\Environment
-			 \Illuminate\View\Environment::startSection($section, $content);
+			//Method inherited from \Illuminate\View\Factory
+			 \Illuminate\View\Factory::startSection($section, $content);
 		 }
 
 		/**
@@ -11560,8 +12788,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function inject($section, $content){
-			//Method inherited from \Illuminate\View\Environment
-			 \Illuminate\View\Environment::inject($section, $content);
+			//Method inherited from \Illuminate\View\Factory
+			 \Illuminate\View\Factory::inject($section, $content);
 		 }
 
 		/**
@@ -11571,8 +12799,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function yieldSection(){
-			//Method inherited from \Illuminate\View\Environment
-			return \Illuminate\View\Environment::yieldSection();
+			//Method inherited from \Illuminate\View\Factory
+			return \Illuminate\View\Factory::yieldSection();
 		 }
 
 		/**
@@ -11583,8 +12811,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function stopSection($overwrite = false){
-			//Method inherited from \Illuminate\View\Environment
-			return \Illuminate\View\Environment::stopSection($overwrite);
+			//Method inherited from \Illuminate\View\Factory
+			return \Illuminate\View\Factory::stopSection($overwrite);
 		 }
 
 		/**
@@ -11594,8 +12822,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function appendSection(){
-			//Method inherited from \Illuminate\View\Environment
-			return \Illuminate\View\Environment::appendSection();
+			//Method inherited from \Illuminate\View\Factory
+			return \Illuminate\View\Factory::appendSection();
 		 }
 
 		/**
@@ -11607,8 +12835,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function yieldContent($section, $default = ''){
-			//Method inherited from \Illuminate\View\Environment
-			return \Illuminate\View\Environment::yieldContent($section, $default);
+			//Method inherited from \Illuminate\View\Factory
+			return \Illuminate\View\Factory::yieldContent($section, $default);
 		 }
 
 		/**
@@ -11618,8 +12846,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function flushSections(){
-			//Method inherited from \Illuminate\View\Environment
-			 \Illuminate\View\Environment::flushSections();
+			//Method inherited from \Illuminate\View\Factory
+			 \Illuminate\View\Factory::flushSections();
 		 }
 
 		/**
@@ -11629,8 +12857,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function flushSectionsIfDoneRendering(){
-			//Method inherited from \Illuminate\View\Environment
-			 \Illuminate\View\Environment::flushSectionsIfDoneRendering();
+			//Method inherited from \Illuminate\View\Factory
+			 \Illuminate\View\Factory::flushSectionsIfDoneRendering();
 		 }
 
 		/**
@@ -11640,8 +12868,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function incrementRender(){
-			//Method inherited from \Illuminate\View\Environment
-			 \Illuminate\View\Environment::incrementRender();
+			//Method inherited from \Illuminate\View\Factory
+			 \Illuminate\View\Factory::incrementRender();
 		 }
 
 		/**
@@ -11651,8 +12879,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function decrementRender(){
-			//Method inherited from \Illuminate\View\Environment
-			 \Illuminate\View\Environment::decrementRender();
+			//Method inherited from \Illuminate\View\Factory
+			 \Illuminate\View\Factory::decrementRender();
 		 }
 
 		/**
@@ -11662,8 +12890,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function doneRendering(){
-			//Method inherited from \Illuminate\View\Environment
-			return \Illuminate\View\Environment::doneRendering();
+			//Method inherited from \Illuminate\View\Factory
+			return \Illuminate\View\Factory::doneRendering();
 		 }
 
 		/**
@@ -11674,8 +12902,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function addLocation($location){
-			//Method inherited from \Illuminate\View\Environment
-			 \Illuminate\View\Environment::addLocation($location);
+			//Method inherited from \Illuminate\View\Factory
+			 \Illuminate\View\Factory::addLocation($location);
 		 }
 
 		/**
@@ -11687,8 +12915,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function addNamespace($namespace, $hints){
-			//Method inherited from \Illuminate\View\Environment
-			 \Illuminate\View\Environment::addNamespace($namespace, $hints);
+			//Method inherited from \Illuminate\View\Factory
+			 \Illuminate\View\Factory::addNamespace($namespace, $hints);
 		 }
 
 		/**
@@ -11700,8 +12928,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function prependNamespace($namespace, $hints){
-			//Method inherited from \Illuminate\View\Environment
-			 \Illuminate\View\Environment::prependNamespace($namespace, $hints);
+			//Method inherited from \Illuminate\View\Factory
+			 \Illuminate\View\Factory::prependNamespace($namespace, $hints);
 		 }
 
 		/**
@@ -11714,8 +12942,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function addExtension($extension, $engine, $resolver = null){
-			//Method inherited from \Illuminate\View\Environment
-			 \Illuminate\View\Environment::addExtension($extension, $engine, $resolver);
+			//Method inherited from \Illuminate\View\Factory
+			 \Illuminate\View\Factory::addExtension($extension, $engine, $resolver);
 		 }
 
 		/**
@@ -11725,8 +12953,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getExtensions(){
-			//Method inherited from \Illuminate\View\Environment
-			return \Illuminate\View\Environment::getExtensions();
+			//Method inherited from \Illuminate\View\Factory
+			return \Illuminate\View\Factory::getExtensions();
 		 }
 
 		/**
@@ -11736,8 +12964,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getEngineResolver(){
-			//Method inherited from \Illuminate\View\Environment
-			return \Illuminate\View\Environment::getEngineResolver();
+			//Method inherited from \Illuminate\View\Factory
+			return \Illuminate\View\Factory::getEngineResolver();
 		 }
 
 		/**
@@ -11747,8 +12975,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getFinder(){
-			//Method inherited from \Illuminate\View\Environment
-			return \Illuminate\View\Environment::getFinder();
+			//Method inherited from \Illuminate\View\Factory
+			return \Illuminate\View\Factory::getFinder();
 		 }
 
 		/**
@@ -11758,8 +12986,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function setFinder($finder){
-			//Method inherited from \Illuminate\View\Environment
-			 \Illuminate\View\Environment::setFinder($finder);
+			//Method inherited from \Illuminate\View\Factory
+			 \Illuminate\View\Factory::setFinder($finder);
 		 }
 
 		/**
@@ -11769,8 +12997,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getDispatcher(){
-			//Method inherited from \Illuminate\View\Environment
-			return \Illuminate\View\Environment::getDispatcher();
+			//Method inherited from \Illuminate\View\Factory
+			return \Illuminate\View\Factory::getDispatcher();
 		 }
 
 		/**
@@ -11781,8 +13009,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function setDispatcher($events){
-			//Method inherited from \Illuminate\View\Environment
-			 \Illuminate\View\Environment::setDispatcher($events);
+			//Method inherited from \Illuminate\View\Factory
+			 \Illuminate\View\Factory::setDispatcher($events);
 		 }
 
 		/**
@@ -11792,8 +13020,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getContainer(){
-			//Method inherited from \Illuminate\View\Environment
-			return \Illuminate\View\Environment::getContainer();
+			//Method inherited from \Illuminate\View\Factory
+			return \Illuminate\View\Factory::getContainer();
 		 }
 
 		/**
@@ -11804,8 +13032,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function setContainer($container){
-			//Method inherited from \Illuminate\View\Environment
-			 \Illuminate\View\Environment::setContainer($container);
+			//Method inherited from \Illuminate\View\Factory
+			 \Illuminate\View\Factory::setContainer($container);
 		 }
 
 		/**
@@ -11817,8 +13045,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function shared($key, $default = null){
-			//Method inherited from \Illuminate\View\Environment
-			return \Illuminate\View\Environment::shared($key, $default);
+			//Method inherited from \Illuminate\View\Factory
+			return \Illuminate\View\Factory::shared($key, $default);
 		 }
 
 		/**
@@ -11828,8 +13056,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getShared(){
-			//Method inherited from \Illuminate\View\Environment
-			return \Illuminate\View\Environment::getShared();
+			//Method inherited from \Illuminate\View\Factory
+			return \Illuminate\View\Factory::getShared();
 		 }
 
 		/**
@@ -11839,8 +13067,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getSections(){
-			//Method inherited from \Illuminate\View\Environment
-			return \Illuminate\View\Environment::getSections();
+			//Method inherited from \Illuminate\View\Factory
+			return \Illuminate\View\Factory::getSections();
 		 }
 
 		/**
@@ -11850,8 +13078,8 @@ namespace {
 		 * @static 
 		 */
 		 public static function getNames(){
-			//Method inherited from \Illuminate\View\Environment
-			return \Illuminate\View\Environment::getNames();
+			//Method inherited from \Illuminate\View\Factory
+			return \Illuminate\View\Factory::getNames();
 		 }
 
 	}
